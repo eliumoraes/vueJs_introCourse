@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <div name="content">
+        <!-- Aqui estou referenciando uma propriedade do objeto colors -->
+        <p ref="primeiroParagrafo">
+          Outra possibilidade é nomear o parágrafo.
+          Isso é chamado de referência.
+        </p>
+
+        <button @click="vermelho()">vermelho</button>
+        <button @click="verde()">verde</button>
+        <button @click="azul()">azul</button>
+        <button @click="amarelo()">amarelo</button>
+      </div>
+    </div>
+
+    <style>
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+    </style>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          colors: {
+            vermelho: false,
+            verde: true,
+            azul: false,
+            amarelo: false,
+          },
+        },
+        methods: {
+          vermelho() {
+              this.$refs.primeiroParagrafo.style.background = "red";
+          },
+          verde() {
+              this.$refs.primeiroParagrafo.style.background = "green";
+          },
+          azul() {
+              this.$refs.primeiroParagrafo.style.background = "blue";
+          },
+          amarelo() {
+              this.$refs.primeiroParagrafo.style.background = "yellow";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

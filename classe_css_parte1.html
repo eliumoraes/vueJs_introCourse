@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <div name="content">
+        <p v-bind:class="classParagrafo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque voluptatum saepe corporis quisquam quasi cum veritatis eligendi ad quod, non vitae alias eius deleniti doloremque accusamus velit aliquid est aspernatur.</p>
+
+        
+        <label>red</label>
+        <input @click="colorirP($event.target.value)" type="radio" name="cor" value="red" checked>
+        
+        <label>green</label>
+        <input @click="colorirP($event.target.value)" type="radio" name="cor" value="green">
+        
+        <label>blue</label>
+        <input @click="colorirP($event.target.value)" type="radio" name="cor" value="blue">
+        
+        <label>yellow</label>
+        <input @click="colorirP($event.target.value)" type="radio" name="cor" value="yellow">
+      </div>      
+    </div>
+
+    <style>
+      .red {background-color: red;}
+      .green {background-color: green;}
+      .blue {background-color: blue;}
+      .yellow {background-color: yellow;}
+    </style>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          classParagrafo: "red",
+          textoDigitado: "Texto Inicial",
+          itens: [],
+        },
+        methods: {
+          inserirTexto() {
+            this.itens.push(this.textoDigitado);
+          },
+          colorirP(cor) {
+            this.classParagrafo = cor;
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

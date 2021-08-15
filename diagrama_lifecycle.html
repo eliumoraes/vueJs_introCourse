@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- O conteúdo da variável só será inserido se não houver template -->
+      {{nome}}
+    </div>
+
+    <script>
+      Vue.component("tendi", {
+        data() {
+          return {
+            titulo: "Painel Notícias",
+          };
+        },
+        methods: {
+          alertExemplo() {
+            this.titulo = "Alerta de exemplo";
+          },
+        },
+        template: `
+          <div>
+            <h1>Titulo exemplo</h1>
+            <button @click="alertExemplo()">Chamar alerta</button>
+            <br>
+            
+          </div>
+          `,
+      });
+
+      const app = new Vue({
+        el: "#app",
+        data: {
+          nome: 1,
+        },
+        methods: {
+          atualizaExemplo() {
+            this.nome++;
+          },
+          destruir() {
+              this.$destroy();
+          },
+        },
+        template: `<div>
+                <tendi></tendi><br>
+                <button @click="atualizaExemplo()">Atualizar</button>
+                <br>
+                <button @click="destruir()">Destruir</button>
+                {{nome}}
+            </div>`,
+        beforeCreate() {
+          console.clear();
+          console.log("Antes de criar tudo, vamos testar");
+        },
+        created() {
+          console.log("Quando foi criado");
+        },
+        beforeMount() {
+          console.log("Antes de montar");
+        },
+        mounted() {
+          console.log("Depois de montar");
+        },
+        beforeUpdate() {
+          console.log("Antes de atualizar: " + this.nome);
+        },
+        updated() {
+          console.log("Depois de atualizar: " + this.nome);
+          console.log("");
+        },
+        beforeDestroy() {
+          console.log("Antes de destruir!");
+        },
+
+        destroyed() {
+          console.log("Destruído!");
+        },
+      });
+    </script>
+  </body>
+</html>

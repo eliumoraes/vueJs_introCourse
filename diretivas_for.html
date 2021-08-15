@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <select id="listaFrutas" name="listaFrutas">
+        <option v-for="fruta in frutas">{{fruta}}</option>
+      </select>
+
+      <hr />
+
+      <p v-for="(fruta, index) in frutas">{{ index }} - {{ fruta }}</p>
+
+      <hr />
+      <ul>
+          <li v-for="(value, key, index) in usuario">
+              <b>{{index}}</b> - {{key}}: {{value}}
+          </li>
+      </ul>
+      <hr />
+
+      <div v-for="imagem in imagens">
+        <img :src="imagem" />
+      </div>
+    </div>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          textoDigitado: "",
+          imagens: ["windows.png", "pix.png", "firefox.png"],
+          frutas: ["Pera", "Uva", "Maçã", "Salada mista"],
+          usuario: {
+            nome: "Eliu",
+            sobrenome: "Moraes",
+            telefone: "018 99640 8163",
+            email: "eliu@eliu.com.br",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

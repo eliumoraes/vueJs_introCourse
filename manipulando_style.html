@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <div><p>Escreva e pressione enter para construir a lista!</p></div>
+      <input
+        type="text"
+        v-on:keyup.enter="inserirTexto()"
+        v-model="textoDigitado"
+      />
+      <p v-if="itens.length > 0">
+        Clique em um item da lista para disparar um alerta.
+      </p>
+      <ul>
+        <!-- Utilizando o $event eu consigo puxar o elemento que se encontra
+          por trás de onde o evento foi disparado.
+          Assim podendo acessar suas propriedades html no target
+          ou o conteúdo -->
+        <li v-for="item in itens" @click="alerta($event)">{{item}}</li>
+      </ul>
+
+      <p v-if="itens.length > 0">
+        Clique em um item da lista para alterar a cor de fundo.
+      </p>
+      <ul>
+        <li v-for="item in itens" @click="alteraBackground($event)">
+          {{item}}
+        </li>
+      </ul>
+
+      <p v-if="itens.length > 0">
+        Clique em um item da lista para alternar a cor de fundo entre duas.
+      </p>
+      <ul>
+        <li
+          v-for="item in itens"
+          @click="alternarCores($event)"
+          style="background: white"
+        >
+          {{item}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          textoDigitado: "Texto Inicial",
+          itens: [],
+        },
+        methods: {
+          inserirTexto() {
+            this.itens.push(this.textoDigitado);
+          },
+          alerta(event) {
+            alert(event.target.textContent.trim());
+          },
+          alteraBackground(event) {
+            event.target.style = "background: red";
+          },
+          alternarCores(event) {
+            //   Posso trabalhar com switch-case ou com if
+            elemento = event.target;
+            switch (elemento.style.background) {
+              case "white":
+                event.target.style = "background: red";
+                break;
+
+              case "red":
+                event.target.style = "background: blue";
+                break;
+
+              case "blue":
+                event.target.style = "background: pink";
+                break;
+
+              default:
+                event.target.style = "background: white";
+                break;
+            }
+            // if (elemento.style.background == "blue") {
+            //   event.target.style = "background: red";
+            // } else {
+            //   event.target.style = "background: blue";
+            // }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

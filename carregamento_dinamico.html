@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <button onclick="instanciar()">Botão fora do escopo!</button>
+    <br />
+    <div id="app2"></div>
+
+    <!-- Com duas instâncias posso compartilhar propriedades do js entre elas: -->
+    <script>
+      function instanciar() {
+        app2.$mount("#app2");
+      }
+
+      const app2 = new Vue({
+        data: {
+          outro: `Mais um`,
+        },
+        methods: {
+          outroEscopo2() {
+            this.outro = "Mensagem disparada dentro do escopo";
+          },
+        },
+        template: "<h1>Agora vem do template: <br> {{outro}}</h1> ",
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+        <!-- Posso utilizar o método de prevenir a ação padrão direto na tag -->
+      <form v-on:submit.prevent="alterarNome('TextoViaParâmetro')">
+        <input type="text" v-model="textoDigitado" />
+        <button type="submit">Adicionar</button>
+        <div><p v-text="textoDigitado"></p></div>
+      </form>
+    </div>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          textoDigitado: "Inicial",
+        },
+        methods: {
+          alterarNome(nomeParam) {
+            this.textoDigitado = nomeParam;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

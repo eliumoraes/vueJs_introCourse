@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <div><p>Escreva no primeiro campo e aperte enter!</p></div>
+      <input
+        type="text"
+        v-on:keyup.enter="alterarNome('TXT Passado via parâmetro')"
+      />
+      <input type="text" disabled v-model="textoDigitado" />
+      <hr />
+      <div><p>Escreva e aperte espaço!</p></div>
+      <input
+        type="text"
+        v-on:keyup.space="alterarNome2('Outro txt via parâmetro')"
+      />
+      <input type="text" disabled v-model="textoDigitado2" />
+      <hr />
+      <div><p>Escreva e pressione enter para construir a lista!</p></div>
+      <input
+        type="text"
+        v-on:keyup.enter="alterarNome3()"
+        v-model="textoDigitado3"
+      />
+      <ul>
+        <li v-for="item in itens">
+            {{item}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Uma vez carregada a biblioteca já posso escrever código: -->
+    <script>
+      new Vue({
+        el: "#app", //Estou avisando o vue que esse é o elemento principal
+        data: {
+          textoDigitado: "Texto Inicial",
+          textoDigitado2: "",
+          textoDigitado3: "",
+          itens: [],
+        },
+        methods: {
+          alterarNome(nomeParam) {
+            this.textoDigitado = nomeParam;
+          },
+          alterarNome2(nomeParam) {
+            this.textoDigitado2 = nomeParam;
+          },
+          alterarNome3() {
+            this.itens.push(this.textoDigitado3);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

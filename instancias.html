@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu primero curso de Vue.JS</title>
+    <!-- Primeiro carrego a biblioteca do vue via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <button onclick="imprimir()">Alteração fora do escopo do vue!</button>
+    <br />
+    <br />
+
+    <hr />
+    <div id="app1">
+      <div name="content">{{nome}}</div>
+      <br />
+      <button @click="outroEscopo1()">BT Dentro do escopo app1</button>
+    </div>
+    <br />
+    <br />
+    <hr />
+
+    <div id="app2">
+      <button @click="outroEscopo2">BT Dentro do escopo app2</button>
+      <br />
+      <br />
+      {{outro}}
+    </div>
+
+    <!-- Com duas instâncias posso compartilhar propriedades do js entre elas: -->
+    <script>
+      let mensagem = "Minha aplicação";
+
+      function imprimir() {
+        app1.nome = "Nova mensagem";
+        app2.outro = "Nova mensagem";
+      }
+
+      const app1 = new Vue({
+        el: "#app1",
+        data: {
+          nome: `${mensagem} 0`,
+        },
+        methods: {
+          outroEscopo1() {
+            this.nome = "Mensagem disparada dentro do escopo";
+            app2.outro = "Mensagem disparada de outro escopo";
+          },
+        },
+      });
+
+      const app2 = new Vue({
+        el: "#app2",
+
+        data: {
+          outro: `${mensagem} 1`,
+        },
+        methods: {
+          outroEscopo2() {
+            this.outro = "Mensagem disparada dentro do escopo";
+            app1.nome = "Mensagem disparada de outro escopo";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
